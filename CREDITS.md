@@ -1,3 +1,7 @@
+# Credits
+This package is based on the [Laravel Settings](https://github.com/anlutro/laravel-settings) package by Andreas Lutro, which is licensed under the MIT License.
+
+## Laravel Settings
 The MIT License (MIT)
 
 Copyright (c) 2014 Andreas Lutro
