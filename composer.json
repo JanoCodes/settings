@@ -1,16 +1,17 @@
 {
-    "name": "anlutro/l4-settings",
-    "description": "Persistent settings in Laravel.",
-    "license": "MIT",
+    "name": "jano-may-ball/settings",
+    "description": "Persistent settings in Laravel; fork of anlutro/l4-settings",
+    "license": "GPL-3.0",
     "authors": [
         {
-            "name": "Andreas Lutro",
-            "email": "anlutro@gmail.com"
+            "name": "Andrew Ying",
+            "email": "andrew@janoticketing.com"
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": ">=4.1 <6.0"
+        "php": ">=5.6.4",
+        "illuminate/support": ">=4.1 <6.0",
+        "laktak/hjson": "^2.0"
     },
     "suggest": {
         "illuminate/filesystem": "Save settings to a JSON file.",
@@ -23,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "anlutro\\LaravelSettings\\": "src/"
+            "Jano\\Settings\\": "src/"
         }
     },
     "minimum-stability": "dev",
