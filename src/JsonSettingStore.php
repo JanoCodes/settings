@@ -7,7 +7,7 @@
  * @package  l4-settings
  */
 
-namespace anlutro\LaravelSettings;
+namespace Jano\Settings;
 
 use Illuminate\Filesystem\Filesystem;
 

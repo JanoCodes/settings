@@ -16,7 +16,7 @@ class JsonSettingStoreTest extends PHPUnit_Framework_TestCase
 
 	protected function makeStore($files, $path = 'fakepath')
 	{
-		return new anlutro\LaravelSettings\JsonSettingStore($files, $path);
+		return new Jano\Settings\JsonSettingStore($files, $path);
 	}
 
 	/**

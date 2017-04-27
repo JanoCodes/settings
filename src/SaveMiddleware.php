@@ -8,10 +8,10 @@
  * @package  l4-settings
  */
 
-namespace anlutro\LaravelSettings;
+namespace Jano\Settings;
 
 use Closure;
-use anlutro\LaravelSettings\SettingStore;
+use Jano\Settings\SettingStore;
 use Illuminate\Contracts\Routing\TerminableMiddleware;
 
 // https://github.com/anlutro/laravel-settings/issues/43

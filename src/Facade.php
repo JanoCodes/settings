@@ -7,12 +7,12 @@
  * @package  l4-settings
  */
 
-namespace anlutro\LaravelSettings;
+namespace Jano\Settings;
 
 class Facade extends \Illuminate\Support\Facades\Facade
 {
 	protected static function getFacadeAccessor()
 	{
-		return 'anlutro\LaravelSettings\SettingsManager';
+		return 'Jano\Settings\SettingsManager';
 	}
 }

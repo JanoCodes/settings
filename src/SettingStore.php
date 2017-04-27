@@ -7,7 +7,7 @@
  * @package  l4-settings
  */
 
-namespace anlutro\LaravelSettings;
+namespace Jano\Settings;
 
 abstract class SettingStore
 {

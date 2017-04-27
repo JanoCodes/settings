@@ -7,7 +7,7 @@
  * @package  l4-settings
  */
 
-namespace anlutro\LaravelSettings;
+namespace Jano\Settings;
 
 use Illuminate\Foundation\Application;
 
@@ -25,32 +25,19 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 	 */
 	public function register()
 	{
-		$method = version_compare(Application::VERSION, '5.2', '>=') ? 'singleton' : 'bindShared';
+		$method = 'singleton';
 
 		// Bind the manager as a singleton on the container.
-		$this->app->$method('anlutro\LaravelSettings\SettingsManager', function($app) {
-			// When the class has been resolved once, make sure that settings
-			// are saved when the application shuts down.
-			if (version_compare(Application::VERSION, '5.0', '<')) {
-				$app->shutdown(function($app) {
-					$app->make('anlutro\LaravelSettings\SettingStore')->save();
-				});
-			}
-			
-			/**
-			 * Construct the actual manager.
-			 */
+		$this->app->$method('Jano\Settings\SettingsManager', function($app) {
 			return new SettingsManager($app);
 		});
 
 		// Provide a shortcut to the SettingStore for injecting into classes.
-		$this->app->bind('anlutro\LaravelSettings\SettingStore', function($app) {
-			return $app->make('anlutro\LaravelSettings\SettingsManager')->driver();
+		$this->app->bind('Jano\Settings\SettingStore', function($app) {
+			return $app->make('Jano\Settings\SettingsManager')->driver();
 		});
 
-		if (version_compare(Application::VERSION, '5.0', '>=')) {
-			$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'settings');
-		}
+		$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'settings');
 	}
 
 	/**
@@ -58,18 +45,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 	 */
 	public function boot()
 	{
-		if (version_compare(Application::VERSION, '5.0', '>=')) {
-			$this->publishes([
-				__DIR__.'/config/config.php' => config_path('settings.php')
-			], 'config');
-			$this->publishes([
-				__DIR__.'/migrations' => database_path('migrations')
-			], 'migrations');
-		} else {
-			$this->app['config']->package(
-				'anlutro/l4-settings', __DIR__ . '/config', 'anlutro/l4-settings'
-			);
-		}
+	    $this->publishes([
+            __DIR__.'/config/config.php' => config_path('settings.php')
+        ], 'config');
 	}
 
 	/**
@@ -80,8 +58,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 	public function provides()
 	{
 		return array(
-			'anlutro\LaravelSettings\SettingsManager',
-			'anlutro\LaravelSettings\SettingStore',
+			'Jano\Settings\SettingsManager',
+			'Jano\Settings\SettingStore',
 		);
 	}
 }

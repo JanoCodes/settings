@@ -16,7 +16,7 @@ class JsonTest extends AbstractFunctionalTest
 			file_put_contents($path, $json);
 		}
 
-		return new \anlutro\LaravelSettings\JsonSettingStore(
+		return new \Jano\Settings\JsonSettingStore(
 			new \Illuminate\Filesystem\Filesystem, $path
 		);
 	}
