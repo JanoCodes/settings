@@ -9,6 +9,8 @@
 
 namespace Jano\Settings;
 
+use HJSON\HJSONParser;
+use HJSON\HJSONStringifier;
 use Illuminate\Support\Manager;
 use Illuminate\Foundation\Application;
 
@@ -24,6 +26,13 @@ class SettingsManager extends Manager
 		$path = $this->getConfig('jano-may-ball/settings::path');
 
 		return new JsonSettingStore($this->app['files'], $path);
+	}
+	
+	public function createHjsonDriver()
+	{
+		$path = $this->getConfig('jano-may-ball/settings::path');
+
+		return new HjsonSettingStore($this->app['files'], new HJSONParser, new HJSONStringifier, $path);
 	}
 
 	public function createMemoryDriver()
