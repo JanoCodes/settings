@@ -32,10 +32,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 			return new SettingsManager($app);
 		});
 
-		// Provide a shortcut to the SettingStore for injecting into classes.
-		$this->app->bind('Jano\Settings\SettingStore', function($app) {
+		// Provide a shortcut to the ArraySettingStore for injecting into classes.
+		$this->app->bind('Jano\Settings\ArraySettingStore', function($app) {
 			return $app->make('Jano\Settings\SettingsManager')->driver();
 		});
+
+        // Provide a shortcut to the ObjectSettingStore for injecting into classes.
+        $this->app->bind('Jano\Settings\ObjectSettingStore', function($app) {
+            return $app->make('Jano\Settings\SettingsManager')->driver();
+        });
 
 		$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'settings');
 	}
@@ -59,7 +64,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 	{
 		return array(
 			'Jano\Settings\SettingsManager',
-			'Jano\Settings\SettingStore',
+            'Jano\Settings\ArraySettingStore',
 		);
 	}
 }

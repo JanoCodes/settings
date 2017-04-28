@@ -1,8 +1,11 @@
 <?php
 
-use anlutro\LaravelSettings\ArrayUtil;
+namespace Tests\Unit;
 
-class ArrayUtilTest extends PHPUnit_Framework_TestCase
+use Jano\Settings\ArrayUtil;
+use PHPUnit\Framework\TestCase;
+
+class ArrayUtilTest extends TestCase
 {
 	/**
 	 * @test
@@ -98,11 +101,14 @@ class ArrayUtilTest extends PHPUnit_Framework_TestCase
 		);
 	}
 
-	/** @test */
+	/**
+     * @test
+     * @expectedException \UnexpectedValueException
+     * @expectedExceptionMessage Non-array segment encountered
+     */
 	public function setThrowsExceptionOnNonArraySegment()
 	{
 		$data = array('foo' => 'bar');
-		$this->setExpectedException('UnexpectedValueException', 'Non-array segment encountered');
 		ArrayUtil::set($data, 'foo.bar', 'baz');
 	}
 

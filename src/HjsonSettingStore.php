@@ -24,7 +24,7 @@ use HJSON\HJSONParser;
 use HJSON\HJSONStringifier;
 use Illuminate\Filesystem\Filesystem;
 
-class HjsonSettingStore extends SettingStore
+class HjsonSettingStore extends ObjectSettingStore
 {
     /**
      * The Filesystem instance.
@@ -39,6 +39,13 @@ class HjsonSettingStore extends SettingStore
      * @var \HJSON\HJSONParser
      */
     private $parser;
+
+    /**
+     * Whether to keep white space.
+     *
+     * @var boolean
+     */
+    private $whitespace;
 
     /**
      * The path of the settings file.
@@ -61,14 +68,22 @@ class HjsonSettingStore extends SettingStore
      * @param \HJSON\HJSONParser $parser
      * @param \HJSON\HJSONStringifier $stringifier
      * @param string $path
+     * @param boolean $whitespace
      * @throws \InvalidArgumentException
      */
-    public function __construct(Filesystem $files, HJSONParser $parser, HJSONStringifier $stringifier, $path = null)
+    public function __construct(
+        Filesystem $files,
+        HJSONParser $parser,
+        HJSONStringifier $stringifier,
+        $path = null,
+        $whitespace = true
+    )
     {
         $this->files = $files;
         $this->parser = $parser;
         $this->stringifier = $stringifier;
         $this->setPath($path ?: storage_path() . '/settings.hjson');
+        $this->whitespace = $whitespace;
     }
 
     /**
@@ -101,7 +116,7 @@ class HjsonSettingStore extends SettingStore
     {
         $contents = $this->files->get($this->path);
 
-        $data = $this->parser->parseWsc($contents);
+        $data = $this->parser->parse($contents, ['keepWsc' => $this->whitespace]);
 
         if ($data === null) {
             throw new \RuntimeException("Invalid HJSON syntax in {$this->path}");
@@ -113,10 +128,10 @@ class HjsonSettingStore extends SettingStore
     /**
      * {@inheritdoc}
      */
-    protected function write(array $data)
+    protected function write($data)
     {
         if ($data) {
-            $contents = $this->stringifier->stringifyWsc($data);
+            $contents = $this->stringifier->stringify($data, ['keepWsc' => $this->whitespace]);
         }
         else {
             $contents = '{}';

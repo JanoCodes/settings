@@ -1,15 +1,22 @@
 <?php
 
-class HjsonTest extends AbstractFunctionalTest
+namespace Tests\Functional;
+
+use HJSON\HJSONParser;
+use HJSON\HJSONStringifier;
+use Illuminate\Filesystem\Filesystem;
+use Jano\Settings\HjsonSettingStore;
+
+class HjsonTest extends ObjectAbstractFunctionalTest
 {
-	protected function createStore(array $data = null)
+	protected function createStore($data = null)
 	{
 		$path = dirname(__DIR__).'/tmp/store.hjson';
-		$stringifier = new \HJSON\HJSONStringifier;
+		$stringifier = new HJSONStringifier();
 
 		if ($data !== null) {
 			if ($data) {
-				$json = $stringifier->stringifyWsc($data);
+				$json = $stringifier->stringify($data);
 			} else {
 				$json = '{}';
 			}
@@ -17,8 +24,8 @@ class HjsonTest extends AbstractFunctionalTest
 			file_put_contents($path, $json);
 		}
 
-		return new \Jano\Settings\HjsonSettingStore(
-			new \Illuminate\Filesystem\Filesystem, new HJSON\HJSONParser, $stringifier, $path
+		return new HjsonSettingStore(
+			new Filesystem, new HJSONParser, $stringifier, $path, false
 		);
 	}
 

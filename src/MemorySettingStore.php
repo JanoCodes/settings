@@ -9,7 +9,7 @@
 
 namespace Jano\Settings;
 
-class MemorySettingStore extends SettingStore
+class MemorySettingStore extends ArraySettingStore
 {
 	/**
 	 * @param array $data

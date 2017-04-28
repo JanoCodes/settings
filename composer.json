@@ -20,11 +20,17 @@
     "require-dev": {
         "mockery/mockery": "0.9.*",
         "illuminate/database": ">=4.1 <6.0",
-        "illuminate/filesystem": ">=4.1 <6.0"
+        "illuminate/filesystem": ">=4.1 <6.0",
+        "phpunit/phpunit": "^5.7"
     },
     "autoload": {
         "psr-4": {
             "Jano\\Settings\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

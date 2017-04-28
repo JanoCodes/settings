@@ -1,9 +1,10 @@
 <?php
 
-use anlutro\LaravelSettings\JsonSettingStore;
-use anlutro\LaravelSettings\DatabaseSettingStore;
+namespace Tests\Functional;
 
-abstract class AbstractFunctionalTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+abstract class ArrayAbstractFunctionalTest extends TestCase
 {
 	protected abstract function createStore(array $data = array());
 
@@ -46,12 +47,15 @@ abstract class AbstractFunctionalTest extends PHPUnit_Framework_TestCase
 		$this->assertStoreEquals($store, array('foo' => array('bar' => 'baz')));
 	}
 
-	/** @test */
+	/**
+     * @test
+     * @expectedException \UnexpectedValueException
+     * @expectedExceptionMessage Non-array segment encountered
+     */
 	public function cannot_set_nested_key_on_non_array_member()
 	{
 		$store = $this->createStore();
 		$store->set('foo', 'bar');
-		$this->setExpectedException('UnexpectedValueException', 'Non-array segment encountered');
 		$store->set('foo.bar', 'baz');
 	}
 
@@ -102,9 +106,6 @@ abstract class AbstractFunctionalTest extends PHPUnit_Framework_TestCase
 			'bar' => array(
 			),
 		);
-		if ($store instanceof DatabaseSettingStore) {
-			unset($expected['bar']);
-		}
 		$this->assertStoreEquals($store, $expected);
 	}
 

@@ -1,6 +1,11 @@
 <?php
 
-class JsonTest extends AbstractFunctionalTest
+namespace Tests\Functional;
+
+use Illuminate\Filesystem\Filesystem;
+use Jano\Settings\JsonSettingStore;
+
+class JsonTest extends ArrayAbstractFunctionalTest
 {
 	protected function createStore(array $data = null)
 	{
@@ -16,8 +21,8 @@ class JsonTest extends AbstractFunctionalTest
 			file_put_contents($path, $json);
 		}
 
-		return new \Jano\Settings\JsonSettingStore(
-			new \Illuminate\Filesystem\Filesystem, $path
+		return new JsonSettingStore(
+			new Filesystem, $path
 		);
 	}
 

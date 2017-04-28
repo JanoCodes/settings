@@ -1,5 +1,24 @@
 <?php
 /**
+ * Jano Ticketing System
+ * Copyright (C) 2016-2017 Andrew Ying
+ *
+ * This file is part of Jano Ticketing System.
+ *
+ * Jano Ticketing System is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License v3.0 as
+ * published by the Free Software Foundation.
+ *
+ * Jano Ticketing System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
  * Laravel 4 - Persistent Settings
  * 
  * @author   Andreas Lutro <anlutro@gmail.com>
@@ -9,7 +28,7 @@
 
 namespace Jano\Settings;
 
-abstract class SettingStore
+abstract class ObjectSettingStore
 {
 	/**
 	 * The settings data.
@@ -44,7 +63,7 @@ abstract class SettingStore
 	{
 		$this->checkLoaded();
 
-		return ArrayUtil::get($this->data, $key, $default);
+		return ObjectUtil::get($this->data, $key, $default);
 	}
 
 	/**
@@ -58,7 +77,7 @@ abstract class SettingStore
 	{
 		$this->checkLoaded();
 
-		return ArrayUtil::has($this->data, $key);
+		return ObjectUtil::has($this->data, $key);
 	}
 
 	/**
@@ -74,10 +93,10 @@ abstract class SettingStore
 		
 		if (is_array($key)) {
 			foreach ($key as $k => $v) {
-				ArrayUtil::set($this->data, $k, $v);
+				ObjectUtil::set($this->data, $k, $v);
 			}
 		} else {
-			ArrayUtil::set($this->data, $key, $value);
+			ObjectUtil::set($this->data, $key, $value);
 		}
 	}
 
@@ -91,7 +110,7 @@ abstract class SettingStore
 		$this->unsaved = true;
 
 		if ($this->has($key)) {
-			ArrayUtil::forget($this->data, $key);
+			ObjectUtil::forget($this->data, $key);
 		}
 	}
 
@@ -103,7 +122,7 @@ abstract class SettingStore
 	public function forgetAll()
 	{
 		$this->unsaved = true;
-		$this->data = array();
+		$this->data = new \stdClass();
 	}
 
 	/**
@@ -156,9 +175,9 @@ abstract class SettingStore
 	/**
 	 * Write the data into the store.
 	 *
-	 * @param  array  $data
+	 * @param  $data
 	 *
 	 * @return void
 	 */
-	abstract protected function write(array $data);
+	abstract protected function write($data);
 }

@@ -11,7 +11,7 @@
 namespace Jano\Settings;
 
 use Closure;
-use Jano\Settings\SettingStore;
+use Jano\Settings\ArraySettingStore;
 use Illuminate\Contracts\Routing\TerminableMiddleware;
 
 // https://github.com/anlutro/laravel-settings/issues/43
@@ -26,9 +26,9 @@ class SaveMiddleware implements LaravelIsStupidMiddleware
 	/**
 	 * Create a new save settings middleware
 	 * 
-	 * @param SettingStore $settings
+	 * @param ArraySettingStore $settings
 	 */
-	public function __construct(SettingStore $settings)
+	public function __construct(ArraySettingStore $settings)
 	{
 		$this->settings = $settings;
 	}

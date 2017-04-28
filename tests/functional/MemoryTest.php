@@ -1,6 +1,10 @@
 <?php
 
-class MemoryTest extends AbstractFunctionalTest
+namespace Tests\Functional;
+
+use Jano\Settings\MemorySettingStore;
+
+class MemoryTest extends ArrayAbstractFunctionalTest
 {
 	protected function assertStoreEquals($store, $expected, $message = null)
 	{
@@ -16,6 +20,6 @@ class MemoryTest extends AbstractFunctionalTest
 
 	protected function createStore(array $data = null)
 	{
-		return new \anlutro\LaravelSettings\MemorySettingStore($data);
+		return new MemorySettingStore($data);
 	}
 }

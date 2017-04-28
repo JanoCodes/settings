@@ -11,7 +11,7 @@ namespace Jano\Settings;
 
 use Illuminate\Filesystem\Filesystem;
 
-class JsonSettingStore extends SettingStore
+class JsonSettingStore extends ArraySettingStore
 {
 	/**
 	 * @param \Illuminate\Filesystem\Filesystem $files

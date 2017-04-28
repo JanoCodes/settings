@@ -1,8 +1,12 @@
 <?php
 
-use Mockery as m;
+namespace Tests\Unit;
 
-class JsonSettingStoreTest extends PHPUnit_Framework_TestCase
+use Jano\Settings\JsonSettingStore;
+use Mockery as m;
+use PHPUnit\Framework\TestCase;
+
+class JsonSettingStoreTest extends TestCase
 {
 	public function tearDown()
 	{
@@ -16,12 +20,12 @@ class JsonSettingStoreTest extends PHPUnit_Framework_TestCase
 
 	protected function makeStore($files, $path = 'fakepath')
 	{
-		return new Jano\Settings\JsonSettingStore($files, $path);
+		return new JsonSettingStore($files, $path);
 	}
 
 	/**
 	 * @test
-	 * @expectedException InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function throws_exception_when_file_not_writeable()
 	{
@@ -33,7 +37,7 @@ class JsonSettingStoreTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @test
-	 * @expectedException InvalidArgumentException
+	 * @expectedException \InvalidArgumentException
 	 */
 	public function throws_exception_when_files_put_fails()
 	{
@@ -45,7 +49,7 @@ class JsonSettingStoreTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * @test
-	 * @expectedException RuntimeException
+	 * @expectedException \RuntimeException
 	 */
 	public function throws_exception_when_file_contains_invalid_json()
 	{
