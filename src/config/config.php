@@ -1,32 +1,44 @@
 <?php
-/**
- * Jano Ticketing System
- * Copyright (C) 2016-2017 Andrew Ying
- *
- * This file is part of Jano Ticketing System.
- *
- * Jano Ticketing System is free software: you can redistribute it and/or
- * modify it under the terms of the GNU General Public License v3.0 as
- * published by the Free Software Foundation.
- *
- * Jano Ticketing System is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+return [
+	/*
+	|--------------------------------------------------------------------------
+	| Default Settings Store
+	|--------------------------------------------------------------------------
+	|
+	| This option controls the default settings store that gets used while
+	| using this settings library.
+	|
+	| Supported: "hjson", "json", "database"
+	|
+	*/
+	'store' => 'json',
 
-return array(
-    /**
-     * The type of storage used.
-     * [hjson|json]
-     */
-	'store' => 'hjson',
-
-    /**
-     * The full path of the configuration file.
-     */
+	/*
+	|--------------------------------------------------------------------------
+	| JSON Store
+	|--------------------------------------------------------------------------
+	|
+	| If the store is set to "hjson", settings are stored in the defined
+	| file path in HJSON format. Use full path to file.
+	|
+	*/
 	'path' => storage_path().'/settings.hjson',
-);
+
+	/*
+	|--------------------------------------------------------------------------
+	| Database Store
+	|--------------------------------------------------------------------------
+	|
+	| The settings are stored in the defined file path in JSON format.
+	| Use full path to JSON file.
+	|
+	*/
+	// If set to null, the default connection will be used.
+	'connection' => null,
+	// Name of the table used.
+	'table' => 'settings',
+	// If you want to use custom column names in database store you could 
+	// set them in this configuration
+	'keyColumn' => 'key',
+	'valueColumn' => 'value'
+];

@@ -1,11 +1,11 @@
 {
-    "name": "jano-may-ball/settings",
+    "name": "Jano/Settings",
     "description": "Persistent settings in Laravel; fork of anlutro/l4-settings",
-    "license": "GPL-3.0",
+    "license": "AGPL-3.0",
     "authors": [
         {
             "name": "Andrew Ying",
-            "email": "andrew@janoticketing.com"
+            "email": "hi@andrewying.com"
         }
     ],
     "require": {
@@ -18,12 +18,14 @@
         "illuminate/database": "Save settings to a database table."
     },
     "require-dev": {
+        "phpunit/phpunit": ">=4.8, <6",
         "mockery/mockery": "0.9.*",
-        "illuminate/database": ">=4.1 <6.0",
-        "illuminate/filesystem": ">=4.1 <6.0",
-        "phpunit/phpunit": "^5.7"
+        "laravel/framework": ">=4.1 <6.0"
     },
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Jano\\Settings\\": "src/"
         }
@@ -31,6 +33,16 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "aliases": {
+                "Setting": "Jano\\Settings\\Facade"
+            },
+            "providers": [
+                "Jano\\Settings\\ServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
