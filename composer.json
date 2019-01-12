@@ -1,5 +1,5 @@
 {
-    "name": "Jano/Settings",
+    "name": "jano/settings",
     "description": "Persistent settings in Laravel; fork of anlutro/l4-settings",
     "license": "AGPL-3.0",
     "authors": [
