@@ -42,7 +42,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                         return $app->make('Jano\Settings\SettingsManager')->driver();
                 });
 
-		$this->app->alias('anlutro\LaravelSettings\SettingStore', 'setting');
+		$this->app->alias('Jano\Settings\ObjectSettingStore', 'setting');
 
 		if (version_compare(Application::VERSION, '5.0', '>=')) {
 			$this->mergeConfigFrom(__DIR__ . '/config/config.php', 'settings');
@@ -78,7 +78,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 		return array(
 			'Jano\Settings\SettingsManager',
                         'Jano\Settings\ArraySettingStore',
-			'Jano\Settings\ObjectSettingStore'
+			'Jano\Settings\ObjectSettingStore',
 			'setting'
 		);
 	}
